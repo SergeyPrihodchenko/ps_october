@@ -1,7 +1,9 @@
 <?php namespace October\PS;
 
 use Backend\Facades\Backend;
+use Cms\Classes\Theme;
 use October\PS\Models\Site;
+use Request;
 use System\Classes\PluginBase;
 
 /**
@@ -9,6 +11,20 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
+
+
+    public function boot() {
+        $httpHost = Request::getHost();
+
+        if($httpHost && $site = Site::where('domain', $httpHost)->first()) {
+            // Set the active site
+            Site::setActiveSite($site);
+
+            // Set the active theme
+            $theme = $site->theme ? $site->theme : 'demo-theme';
+            Theme::setActiveTheme($theme);
+        }
+    }
 
     public function pluginDetails()
     {
