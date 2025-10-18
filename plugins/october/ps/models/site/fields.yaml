@@ -17,10 +17,8 @@ fields:
         spanClass: auto
     theme:
         label: Тема
-        type: relation
         span: row
         emptyOption: Выбрать тему
-        select: theme
         spanClass: auto
     domain:
         label: Домен
