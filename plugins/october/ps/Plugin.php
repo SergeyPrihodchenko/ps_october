@@ -1,5 +1,6 @@
 <?php namespace October\PS;
 
+use Backend\Facades\Backend;
 use System\Classes\PluginBase;
 
 /**
@@ -26,17 +27,30 @@ class Plugin extends PluginBase
         ];
     }
 
-public function registerSettings() {
-    return [
-        'sites' => [
-            'label'       => 'Sites',
-            'description' => 'Manage the list of sites.',
-            'category'    => 'October Demo',
-            'icon'        => 'icon-globe',
-            'class'       => \October\PS\Models\Site::class,
-            'order'       => 500,
-            'keywords'    => 'sites domain theme',
-        ],
-    ];
-}
+    public function registerSettings() {
+        return [
+            'sites' => [
+                'label'       => 'Sites',
+                'description' => 'Manage the list of sites.',
+                'category'    => 'October Demo',
+                'icon'        => 'icon-globe',
+                'class'       => \October\PS\Models\Site::class,
+                'order'       => 500,
+                'keywords'    => 'sites domain theme',
+            ],
+        ];
+    }
+
+    public function registerNavigation()
+    {
+        return [
+            'ps' => [
+                'label'       => 'October Demo',
+                'url'         => Backend::url('october/ps/sites'),
+                'icon'        => 'icon-leaf',
+                'permissions' => ['october.ps.*'],
+                'order'       => 500,
+            ],
+        ];
+    }
 }
