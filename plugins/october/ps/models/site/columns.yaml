@@ -10,8 +10,8 @@ columns:
         searchable: true
     theme:
         label: Тема
-        relation: theme
-        select: name
+        relation: site
+        select: theme
         searchable: true
     domain:
         label: Домен

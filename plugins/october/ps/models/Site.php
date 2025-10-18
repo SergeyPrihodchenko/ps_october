@@ -46,7 +46,6 @@ class Site extends Model
             'code' => $this->theme,
             'is_enabled' => true,
             'is_enabled_edit' => true,
-            //'is_restricted' => false,
             'is_custom_url' => true,
             'app_url' => 'https://' . $this->domain,
         ];
@@ -67,7 +66,6 @@ class Site extends Model
             'code' => $this->domain,
             'is_enabled' => true,
             'is_enabled_edit' => true,
-            //'is_restricted' => false,
             'is_custom_url' => true,
             'app_url' => 'https://' . $this->domain,
         ];
