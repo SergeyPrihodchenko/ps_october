@@ -3,9 +3,8 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
-        searchable: true
-    domain:
-        label: Domain
+    site:
+        label: Название
+        relation: site
+        select: name
         searchable: true

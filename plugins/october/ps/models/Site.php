@@ -1,6 +1,8 @@
 <?php namespace October\PS\Models;
 
+use Cms\Classes\Theme;
 use Model;
+use System\Models\SiteDefinition;
 
 /**
  * Site Model
@@ -26,13 +28,70 @@ class Site extends Model
         'theme' => 'required|nullable|string',
     ];
 
-    public function getThemeOptions()
+    public $belongsTo = [
+        'site' => [
+            SiteDefinition::class,
+            'key' => 'site_id'
+        ],
+    ];
+
+    public function beforeCreate()
     {
-        $themes = \Cms\Classes\Theme::allAvailable();
-        $idDirs = [];
-        foreach ($themes as $theme) {
-            $idDirs[$theme->getId()] = $theme->getDirName();
+
+        $site = new SiteDefinition();
+
+        $site->attributes = [
+            'name' => $this->domain,
+            'theme' => $this->theme,
+            'code' => $this->theme,
+            'is_enabled' => true,
+            'is_enabled_edit' => true,
+            //'is_restricted' => false,
+            'is_custom_url' => true,
+            'app_url' => 'https://' . $this->domain,
+        ];
+
+        $site->save();
+
+        $this->site_id = $site->id;
+    }
+
+    public function beforeUpdate()
+    {
+
+        $site = $this->site;
+
+        $site->attributes = [
+            'name' => $this->domain,
+            'theme' => $this->theme,
+            'code' => $this->domain,
+            'is_enabled' => true,
+            'is_enabled_edit' => true,
+            //'is_restricted' => false,
+            'is_custom_url' => true,
+            'app_url' => 'https://' . $this->domain,
+        ];
+
+        $site->save();
+    }
+
+
+    public function getThemeOptions(): array
+    {
+        $result = [
+            '' => '— ' . __('Use Default') . ' —',
+        ];
+
+        foreach (Theme::all() as $theme) {
+            if ($theme->isLocked()) {
+                $label = $theme->getConfigValue('name') . ' (' . $theme->getDirName() . '*)';
+            } else {
+                $label = $theme->getConfigValue('name') . ' (' . $theme->getDirName() . ')';
+            }
+
+            $result[$theme->getDirName()] = $label;
         }
-        return $idDirs;
+
+        return $result;
     }
 }
