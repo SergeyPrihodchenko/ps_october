@@ -6,3 +6,7 @@ fields:
     id:
         label: ID
         disabled: true
+    domain:
+        label: Domain
+        type: text
+        span: auto

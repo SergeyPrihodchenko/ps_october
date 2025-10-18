@@ -6,3 +6,6 @@ columns:
     id:
         label: ID
         searchable: true
+    domain:
+        label: Domain
+        searchable: true
