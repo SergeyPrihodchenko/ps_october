@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Site
+
+# Model Form Field configuration
+form: $/october/ps/models/site/fields.yaml
+
+# Model Class name
+modelClass: October\PS\Models\Site
+
+# Default redirect location
+defaultRedirect: october/ps/site
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: october/ps/site/update/:id
+    redirectClose: october/ps/site
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: october/ps/site
+    redirectClose: october/ps/site
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title
