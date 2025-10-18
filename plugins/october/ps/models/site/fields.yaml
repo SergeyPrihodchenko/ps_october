@@ -7,24 +7,24 @@ fields:
         label: ID
         disabled: true
         span: row
-        spanClass: col-12 col-md-4 col-xl-4
+        spanClass: auto
     site:
         label: Сайт
         type: relation
         span: row
         emptyOption: Создать
         select: name
-        spanClass: col-12 col-md-4 col-xl-4
-    site:
+        spanClass: auto
+    theme:
         label: Тема
         type: relation
         span: row
         emptyOption: Выбрать тему
         select: theme
-        spanClass: col-12 col-md-4 col-xl-4
+        spanClass: auto
     domain:
         label: Домен
         type: text
         span: row
-        spanClass: col-12 col-md-4 col-xl-4
+        spanClass: auto
     
