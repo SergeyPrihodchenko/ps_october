@@ -25,4 +25,18 @@ class Plugin extends PluginBase
             \October\PS\Components\BackendLink::class => 'backendLink'
         ];
     }
+
+public function registerSettings() {
+    return [
+        'sites' => [
+            'label'       => 'Sites',
+            'description' => 'Manage the list of sites.',
+            'category'    => 'October Demo',
+            'icon'        => 'icon-globe',
+            'class'       => \October\PS\Models\Site::class,
+            'order'       => 500,
+            'keywords'    => 'sites domain theme',
+        ],
+    ];
+}
 }
