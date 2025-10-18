@@ -1,4 +1,4 @@
-<?php namespace October\Demo;
+<?php namespace October\PS;
 
 use System\Classes\PluginBase;
 
@@ -21,8 +21,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \October\Demo\Components\Todo::class => 'demoTodo',
-            \October\Demo\Components\BackendLink::class => 'backendLink'
+            \October\PS\Components\Todo::class => 'psTodo',
+            \October\PS\Components\BackendLink::class => 'backendLink'
         ];
     }
 }
