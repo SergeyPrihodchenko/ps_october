@@ -18,9 +18,6 @@ class Plugin extends PluginBase
         $httpHost = Request::getHost();
         Log::info('HTTP Host: ' . $httpHost);
         if($httpHost && $site = Site::where('domain', $httpHost)->first()) {
-            // Set the active site
-            Site::setActiveSite($site);
-
             // Set the active theme
             $theme = $site->theme ? $site->theme : 'demo-theme';
             Theme::setActiveTheme($theme);
