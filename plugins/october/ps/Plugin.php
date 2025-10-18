@@ -2,6 +2,7 @@
 
 use Backend\Facades\Backend;
 use Cms\Classes\Theme;
+use Log;
 use October\PS\Models\Site;
 use Request;
 use System\Classes\PluginBase;
@@ -15,7 +16,7 @@ class Plugin extends PluginBase
 
     public function boot() {
         $httpHost = Request::getHost();
-
+        Log::info('HTTP Host: ' . $httpHost);
         if($httpHost && $site = Site::where('domain', $httpHost)->first()) {
             // Set the active site
             Site::setActiveSite($site);
