@@ -8,3 +8,11 @@ columns:
         relation: site
         select: name
         searchable: true
+    theme:
+        label: Тема
+        relation: theme
+        select: name
+        searchable: true
+    domain:
+        label: Домен
+        searchable: true
