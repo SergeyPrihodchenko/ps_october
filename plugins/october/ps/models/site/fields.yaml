@@ -18,6 +18,7 @@ fields:
         label: Тема
         type: relation
         span: row
+        emptyOption: Выбрать тему
         spanClass: col-12 col-md-4 col-xl-4
     domain:
         label: Домен
