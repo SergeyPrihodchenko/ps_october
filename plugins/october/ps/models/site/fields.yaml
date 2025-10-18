@@ -3,11 +3,6 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
-        span: row
-        spanClass: auto
     site:
         label: Сайт
         type: relation
@@ -16,7 +11,8 @@ fields:
         select: name
         spanClass: auto
     theme:
-        label: Тема
+        label: Тема сайта
+        type: dropdown
         span: row
         emptyOption: Выбрать тему
         spanClass: auto
