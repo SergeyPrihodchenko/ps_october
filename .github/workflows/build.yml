@@ -1,0 +1,9 @@
+- name: Deploy via SSH
+  uses: appleboy/ssh-action@v1.1.0
+  with:
+    host: ${{ secrets.SSH_HOST }}
+    username: ${{ secrets.SSH_USER }}
+    key: ${{ secrets.SSH_KEY }}
+    script: |
+      cd /var/www/fastuser/data/www/prihodays.ru
+      git pull origin main
