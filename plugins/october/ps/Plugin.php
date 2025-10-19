@@ -15,13 +15,18 @@ class Plugin extends PluginBase
 
 
     public function boot() {
-        $httpHost = Request::getHost();
-        Log::info('HTTP Host: ' . $httpHost);
-        if($httpHost && $site = Site::where('domain', $httpHost)->first()) {
-            // Set the active theme
-            $theme = $site->theme ? $site->theme : 'demo-theme';
-            Theme::setActiveTheme($theme);
-        }
+        \Event::listen('cms.theme.getActiveTheme', function () {
+            $httpHost = Request::getHost();
+            \Log::info('HTTP Host: ' . $httpHost);
+
+            $site = Site::where('domain', $httpHost)->first();
+
+            if ($site && $site->theme) {
+                return $site->theme;
+            }
+
+            return 'demo';
+        });
     }
 
     public function pluginDetails()
