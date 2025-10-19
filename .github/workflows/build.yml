@@ -1,9 +1,29 @@
-- name: Deploy via SSH
-  uses: appleboy/ssh-action@v1.1.0
-  with:
-    host: ${{ secrets.SSH_HOST }}
-    username: ${{ secrets.SSH_USER }}
-    key: ${{ secrets.SSH_KEY }}
-    script: |
-      cd /var/www/fastuser/data/www/prihodays.ru
-      git pull origin main
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Debug secrets
+        run: |
+          echo "SERVER_HOST=${{ secrets.SSH_HOST }}"
+          echo "SERVER_USER=${{ secrets.SSH_USER }}"
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/fastuser/data/www/prihodays.ru
+            git pull origin master
