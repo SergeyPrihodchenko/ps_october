@@ -1,8 +1,6 @@
 <?php namespace October\PS;
 
 use Backend\Facades\Backend;
-use Cms\Classes\Theme;
-use Log;
 use October\PS\Models\Site;
 use Request;
 use System\Classes\PluginBase;
@@ -15,18 +13,22 @@ class Plugin extends PluginBase
 
 
     public function boot() {
-        \Event::listen('cms.theme.getActiveTheme', function () {
-            $httpHost = Request::getHost();
-            \Log::info('HTTP Host: ' . $httpHost);
+        if(env('APP_ENV') === 'production') {
+            \Event::listen('cms.theme.getActiveTheme', function () {
+                $httpHost = Request::getHost();
+                $site = Site::where('domain', $httpHost)->first();
 
-            $site = Site::where('domain', $httpHost)->first();
+                if ($site && $site->theme) {
+                    return $site->theme;
+                }
 
-            if ($site && $site->theme) {
-                return $site->theme;
-            }
-
-            return 'demo';
-        });
+                return 'demo';
+            });
+        } else {
+            \Event::listen('cms.theme.getActiveTheme', function () {
+                return 'olimp-urypinsk';
+            });
+        }
     }
 
     public function pluginDetails()
